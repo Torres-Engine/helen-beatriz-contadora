@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helen Beatriz | Contadora, Autoridade em Imposto de Renda e Contabilidade</title>
+<meta name="description" content="Helen Beatriz, contadora especializada em Imposto de Renda, abertura de empresas, contabilidade mensal e consultoria tributária para pessoas físicas e jurídicas.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Helen Beatriz | Contadora">
+<meta property="og:description" content="Domínio técnico e segurança para a sua vida fiscal e empresarial.">
+<meta property="og:type" content="website">
+
+<!-- Favicon: TODO — substituir por assets/favicon.png quando disponível (ver assets/LEIA-ME.md) -->
+
+<!-- Fontes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Barra de progresso de rolagem (UX: dá noção de quanto falta para o fim da página) -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="#topo" class="brand">
+      <img class="brand__logo" src="assets/logo-dourado.png" alt="Helen Beatriz Contadora">
+    </a>
+
+    <nav class="nav" id="nav">
+      <ul class="nav__list">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__actions">
+      <a class="btn btn--outline btn--sm" target="_blank" rel="noopener"
+         href="https://instagram.com/contadora.helenbeatriz" aria-label="Instagram da Helen Beatriz Contadora">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a class="btn btn--gold btn--sm nav__cta" target="_blank" rel="noopener"
+         href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Vi%20seu%20site%20e%20gostaria%20de%20falar%20sobre%20contabilidade.">
+        <i class="fa-brands fa-whatsapp"></i> Fale no WhatsApp
+      </a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="topo">
+  <!-- Foto: "a black and white photo of a lion" por Bro Takes Photos (@brotakesphotos), Unsplash License
+       (uso comercial livre, sem atribuição obrigatória) — auto-hospedada em assets/leao-hero.jpg, ver docs/DECISIONS.md D-13. -->
+  <div class="hero__visual" aria-hidden="true">
+    <span class="hero__badge">
+      <img src="assets/logo-dourado.png" alt="">
+    </span>
+  </div>
+
+  <div class="hero__content container">
+    <p class="eyebrow">Contabilidade com autoridade</p>
+    <h1>Domínio técnico e segurança para a sua vida fiscal e empresarial.</h1>
+    <p class="hero__sub">
+      Helen Beatriz é contadora especializada em Imposto de Renda, abertura de empresas e gestão
+      contábil para pessoas físicas e jurídicas. Decisões seguras começam com quem domina o assunto.
+    </p>
+
+    <div class="hero__actions">
+      <a class="btn btn--gold" target="_blank" rel="noopener"
+         href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Vi%20seu%20site%20e%20gostaria%20de%20falar%20sobre%20contabilidade.">
+        <i class="fa-brands fa-whatsapp"></i> Falar com a Helen agora
+      </a>
+      <a class="btn btn--outline" href="#servicos">Ver serviços</a>
+    </div>
+
+    <p class="hero__trust">Atendimento personalizado &middot; Sigilo total &middot; Atualização constante na legislação</p>
+  </div>
+
+  <!-- Símbolo Internacional da Contabilidade (Caduceu Contábil, CFC) — domínio público, Wikimedia Commons -->
+  <aside class="hero__science" aria-label="Ciências Contábeis">
+    <p class="eyebrow eyebrow--center hero__science-eyebrow">Ciências Contábeis</p>
+    <div class="hero__science-medallion">
+      <div class="hero__science-medallion-glow" aria-hidden="true"></div>
+      <div class="hero__science-medallion-ring" aria-hidden="true"></div>
+      <div class="hero__science-medallion-fill">
+        <img class="hero__science-symbol" src="assets/caduceu-contabil.png" alt="Símbolo internacional das Ciências Contábeis">
+      </div>
+    </div>
+    <span class="hero__science-divider" aria-hidden="true"></span>
+    <p class="hero__science-quote">&ldquo;A contabilidade é a linguagem dos negócios.&rdquo;</p>
+  </aside>
+</section>
+
+<!-- ===================== SOBRE ===================== -->
+<section class="section" id="sobre">
+  <div class="container section__grid">
+    <div class="section__media">
+      <!-- TODO: substituir pela foto profissional real em assets/foto-helen.jpg -->
+      <div class="photo-frame">
+        <img src="assets/foto-helen.jpg" alt="Helen Beatriz, contadora" onerror="this.parentElement.classList.add('photo-frame--empty')">
+        <span class="photo-frame__fallback">Foto da Helen Beatriz aqui</span>
+      </div>
+    </div>
+
+    <div class="section__text">
+      <p class="eyebrow">Sobre</p>
+      <h2>Quem cuida da sua contabilidade importa.</h2>
+      <p>
+        Com <strong>5 anos</strong> de atuação e pós-graduação em <strong>Reforma Tributária</strong>, Helen Beatriz
+        construiu sua carreira ajudando pessoas físicas e empresas a tomarem decisões financeiras e tributárias
+        com clareza e segurança. Registrada no <strong>CRC PR-082924/O-5</strong>, Helen combina domínio técnico da
+        legislação fiscal brasileira com um atendimento próximo, direto e sem jargões desnecessários.
+      </p>
+      <p>
+        Seu compromisso é simples: transformar obrigações contábeis em vantagem estratégica para
+        quem confia no seu trabalho.
+      </p>
+      <blockquote class="pull-quote">
+        “Contabilidade não é burocracia. É estratégia.”
+        <cite>— Helen Beatriz</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DIFERENCIAIS ===================== -->
+<section class="section section--muted" id="diferenciais">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">Diferenciais</p>
+    <h2 class="section__title">Por que clientes confiam no trabalho da Helen</h2>
+
+    <div class="cards-grid">
+      <article class="card">
+        <i class="fa-solid fa-file-invoice-dollar card__icon"></i>
+        <h3>Especialização em IR</h3>
+        <p>Anos dedicados a declarações de Imposto de Renda, sem erros e sem deixar dinheiro na mesa.</p>
+      </article>
+      <article class="card">
+        <i class="fa-solid fa-comments card__icon"></i>
+        <h3>Atendimento direto</h3>
+        <p>Você fala direto com a contadora responsável pelo seu caso, sem intermediários.</p>
+      </article>
+      <article class="card">
+        <i class="fa-solid fa-graduation-cap card__icon"></i>
+        <h3>Atualização constante</h3>
+        <p>Acompanhamento de cada mudança na legislação para proteger seu CPF e seu CNPJ.</p>
+      </article>
+      <article class="card">
+        <i class="fa-solid fa-shield-halved card__icon"></i>
+        <h3>Sigilo e segurança</h3>
+        <p>Seus dados e documentos tratados com confidencialidade total.</p>
+      </article>
+      <article class="card">
+        <i class="fa-solid fa-building card__icon"></i>
+        <h3>Pessoa física e jurídica</h3>
+        <p>Estrutura completa para pessoa física e para empresas de todos os portes.</p>
+      </article>
+      <article class="card">
+        <i class="fa-regular fa-clock card__icon"></i>
+        <h3>Prazo é prioridade</h3>
+        <p>Organização que evita multas, pendências e dor de cabeça de última hora.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVIÇOS ===================== -->
+<section class="section" id="servicos">
+  <div class="container">
+    <p class="eyebrow eyebrow--center">Serviços</p>
+    <h2 class="section__title">Contabilidade completa para PF e PJ</h2>
+
+    <div class="cards-grid cards-grid--services">
+      <article class="service-card">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+        <h3>Imposto de Renda Pessoa Física</h3>
+        <p>Declaração completa, revisão de malha fina e restituição otimizada.</p>
+        <a target="_blank" rel="noopener"
+           href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Quero%20saber%20mais%20sobre%20Imposto%20de%20Renda%20Pessoa%20F%C3%ADsica.">
+          Saber mais <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </article>
+
+      <article class="service-card">
+        <i class="fa-solid fa-building-circle-check"></i>
+        <h3>Abertura de Empresa / MEI</h3>
+        <p>CNPJ, enquadramento tributário ideal e registro completo nos órgãos.</p>
+        <a target="_blank" rel="noopener"
+           href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Quero%20abrir%20uma%20empresa%2FMEI.">
+          Saber mais <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </article>
+
+      <article class="service-card">
+        <i class="fa-solid fa-file-signature"></i>
+        <h3>Contabilidade Mensal PJ</h3>
+        <p>Escrituração, obrigações fiscais e guias sempre em dia.</p>
+        <a target="_blank" rel="noopener"
+           href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Quero%20saber%20sobre%20contabilidade%20mensal%20para%20minha%20empresa.">
+          Saber mais <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </article>
+
+      <article class="service-card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Consultoria Tributária</h3>
+        <p>Planejamento estratégico para reduzir carga tributária dentro da lei.</p>
+        <a target="_blank" rel="noopener"
+           href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Quero%20uma%20consultoria%20tribut%C3%A1ria.">
+          Saber mais <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </article>
+
+      <article class="service-card">
+        <i class="fa-solid fa-users"></i>
+        <h3>Folha de Pagamento e eSocial</h3>
+        <p>Admissões, rescisões, encargos e obrigações trabalhistas em dia.</p>
+        <a target="_blank" rel="noopener"
+           href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Quero%20saber%20sobre%20folha%20de%20pagamento%20e%20eSocial.">
+          Saber mais <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </article>
+
+      <article class="service-card">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <h3>Regularização e Malha Fina</h3>
+        <p>Resolução de pendências e regularização junto à Receita Federal.</p>
+        <a target="_blank" rel="noopener"
+           href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Estou%20com%20uma%20pend%C3%AAncia%20na%20Receita%20Federal.">
+          Saber mais <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BANNER IR (evergreen — ver DECISIONS.md D-03) ===================== -->
+<section class="banner-ir">
+  <div class="container banner-ir__inner">
+    <div>
+      <h2>Imposto de Renda: prazo é prazo.</h2>
+      <p>Todos os anos, milhares de pessoas perdem o prazo, caem na malha fina ou pagam mais imposto
+         do que deveriam por falta de orientação. Fale agora com quem acompanha os prazos de perto.</p>
+    </div>
+    <a class="btn btn--gold" target="_blank" rel="noopener"
+       href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Quero%20verificar%20meu%20prazo%20do%20Imposto%20de%20Renda.">
+      <i class="fa-brands fa-whatsapp"></i> Verificar meu prazo
+    </a>
+  </div>
+</section>
+
+<!-- ===================== CONTATO FINAL ===================== -->
+<section class="cta-final" id="contato">
+  <div class="container cta-final__inner">
+    <img class="hero__monogram hero__monogram--small" src="assets/logo-branco.png" alt="" aria-hidden="true">
+    <h2>Vamos cuidar da sua contabilidade juntos?</h2>
+    <p>Fale agora mesmo com a Helen Beatriz e tire suas dúvidas sem compromisso.</p>
+
+    <div class="cta-final__actions">
+      <a class="btn btn--gold" target="_blank" rel="noopener"
+         href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Vi%20seu%20site%20e%20gostaria%20de%20falar%20sobre%20contabilidade.">
+        <i class="fa-brands fa-whatsapp"></i> (41) 9.9963-9108
+      </a>
+      <a class="btn btn--outline" target="_blank" rel="noopener" href="https://instagram.com/contadora.helenbeatriz">
+        <i class="fa-brands fa-instagram"></i> @contadora.helenbeatriz
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="brand brand--footer">
+      <img class="brand__logo" src="assets/logo-dourado.png" alt="Helen Beatriz Contadora">
+    </div>
+
+    <ul class="footer__nav">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#diferenciais">Diferenciais</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+
+    <div class="footer__social">
+      <a target="_blank" rel="noopener" href="https://wa.me/5541999639108" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a target="_blank" rel="noopener" href="https://instagram.com/contadora.helenbeatriz" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>CRC PR-082924/O-5 &middot; &copy; <span id="year"></span> Helen Beatriz Contadora. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- Botão flutuante de WhatsApp: aparece após rolar o hero (UX de conversão — proposta da Juliana) -->
+<a class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"
+   href="https://wa.me/5541999639108?text=Ol%C3%A1%2C%20Helen!%20Vi%20seu%20site%20e%20gostaria%20de%20falar%20sobre%20contabilidade.">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>
