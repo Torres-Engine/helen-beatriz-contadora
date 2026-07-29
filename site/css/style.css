@@ -15,13 +15,13 @@
   --gray-600: #5b6472;
   --gray-200: #e4e7eb;
 
-  --font-script: 'Alex Brush', cursive;
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Montserrat', sans-serif;
 
   --radius: 10px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   --container-width: 1160px;
+  --header-height: 70px; /* altura real do .navbar sticky — usada como scroll-margin-top nas âncoras do menu */
 
   /* Padrão diamantado sutil usado nos fundos navy (mesmo espírito da peça de campanha) */
   --diamond-pattern:
@@ -31,10 +31,11 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-body);
   color: var(--navy-900);
   background: var(--white);
@@ -66,7 +67,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 /* Eyebrows dentro de .section ficam sobre fundo branco/off-white — usam o dourado escuro para contraste AA */
 .section .eyebrow { color: var(--gold-dark); }
 
-.section { padding: 96px 0; }
+.section { padding: 96px 0; scroll-margin-top: var(--header-height); }
 .section--muted { background: var(--off-white); }
 .section__title { text-align: center; max-width: 640px; margin: 0 auto 56px; }
 
@@ -128,6 +129,24 @@ ul { list-style: none; margin: 0; padding: 0; }
 .whatsapp-float.is-visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
 .whatsapp-float:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.35); transform: translateY(-2px) scale(1.05); }
 
+/* Pulso sutil e lento: chama atenção para o único CTA fixo da página sem ser
+   irritante. Só roda quando o botão já está visível (depois do hero). */
+.whatsapp-float.is-visible::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  opacity: 0;
+  animation: whatsappPulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes whatsappPulse {
+  0% { transform: scale(0.92); opacity: 0.55; }
+  70% { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
 /* ============================================================
    Header
    ============================================================ */
@@ -137,9 +156,18 @@ ul { list-style: none; margin: 0; padding: 0; }
   z-index: 100;
   background: linear-gradient(180deg, var(--navy-900), var(--navy-800));
   border-bottom: 1px solid rgba(86,101,117,0.35);
-  transition: box-shadow .2s ease;
+  transition: box-shadow .25s ease, background .3s ease, backdrop-filter .3s ease;
 }
-.navbar.is-scrolled { box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+/* Ao rolar: header fica compacto e ganha efeito "vidro fosco" — acabamento premium
+   comum em sites de alto padrão, sinaliza hierarquia sem perder a marca visível. */
+.navbar.is-scrolled {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+  background: linear-gradient(180deg, rgba(19,39,61,0.94), rgba(33,52,73,0.94));
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+.navbar.is-scrolled .navbar__inner { padding-top: 10px; padding-bottom: 10px; }
+.navbar.is-scrolled .brand__logo { height: 34px; }
 
 .navbar__actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .navbar__actions .btn--outline { border-color: rgba(255,255,255,0.35); padding: 10px 14px; }
@@ -152,10 +180,11 @@ ul { list-style: none; margin: 0; padding: 0; }
   gap: 24px;
   padding-top: 14px;
   padding-bottom: 14px;
+  transition: padding .25s ease;
 }
 
 .brand { display: flex; align-items: center; }
-.brand__logo { height: 40px; width: auto; }
+.brand__logo { height: 40px; width: auto; transition: height .25s ease; }
 
 .nav__list { display: flex; gap: 32px; }
 .nav__list a {
@@ -178,8 +207,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   transform-origin: left;
   transition: transform .25s ease;
 }
-.nav__list a:hover, .nav__list a:focus-visible { opacity: 1; color: var(--gold-light); }
-.nav__list a:hover::after, .nav__list a:focus-visible::after { transform: scaleX(1); }
+.nav__list a:hover, .nav__list a:focus-visible, .nav__list a.is-active { opacity: 1; color: var(--gold-light); }
+.nav__list a:hover::after, .nav__list a:focus-visible::after, .nav__list a.is-active::after { transform: scaleX(1); }
 
 .nav__cta { flex-shrink: 0; }
 
@@ -501,12 +530,14 @@ ul { list-style: none; margin: 0; padding: 0; }
   padding: 96px 0;
   position: relative;
   overflow: hidden;
+  scroll-margin-top: var(--header-height);
 }
 .hero__monogram--small {
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(320px, 46vw, 620px);
+  position: static;
+  display: block;
+  margin: 0 auto 20px;
+  opacity: 0.14;
+  width: clamp(150px, 20vw, 220px);
   height: auto;
 }
 .cta-final__inner { position: relative; }
@@ -524,7 +555,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
-  padding: 48px 0 24px;
+  padding-top: 48px;
+  padding-bottom: 24px;
 }
 .brand--footer .brand__logo { height: 32px; }
 .footer__nav { display: flex; gap: 24px; flex-wrap: wrap; }
@@ -535,7 +567,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .footer__bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-size: 12px;
   text-align: center;
   color: var(--gray-600);
@@ -553,6 +586,14 @@ ul { list-style: none; margin: 0; padding: 0; }
 @media (max-width: 1024px) {
   .section__grid { grid-template-columns: 1fr; }
   .photo-frame { max-width: 360px; margin: 0 auto; }
+
+  /* Hero: as 3 colunas fixas ficam espremidas em tablets/notebooks pequenos
+     (769-1024px) antes de a navegação colapsar para o menu hambúrguer (768px).
+     Empilha a coluna aqui, mais cedo que o breakpoint do menu, para evitar
+     texto apertado nessa faixa intermediária. */
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero__visual { min-height: 320px; }
+  .hero__science { padding: 40px 24px; border-left: none; border-top: 1px solid rgba(219,174,114,0.18); }
 }
 
 @media (max-width: 900px) {
@@ -577,9 +618,10 @@ ul { list-style: none; margin: 0; padding: 0; }
   }
   .nav.is-open .nav__list { flex-direction: column; gap: 20px; }
 
-  .hero { grid-template-columns: 1fr; }
+  /* .hero já empilhado desde 1024px (ver acima); aqui só refinamos o
+     espaçamento para a tela de celular. */
   .hero__visual { min-height: 220px; }
-  .hero__science { padding: 32px 22px; border-left: none; border-top: 1px solid rgba(219,174,114,0.18); }
+  .hero__science { padding: 32px 22px; }
 
   .cards-grid { grid-template-columns: 1fr; }
 
@@ -605,8 +647,30 @@ a:focus-visible, button:focus-visible {
   outline-offset: 3px;
 }
 
+/* Skip link: some visualmente até ganhar foco via Tab (acessibilidade) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 999;
+  background: var(--navy-900);
+  color: var(--white);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: top .2s ease;
+}
+.skip-link:focus-visible {
+  top: 16px;
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 @media (max-width: 480px) {
   .section { padding: 64px 0; }
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { justify-content: center; }
+  .cta-final__actions { flex-direction: column; align-items: stretch; }
+  .cta-final__actions .btn { justify-content: center; white-space: normal; }
 }

@@ -83,4 +83,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15 });
 
   allRevealTargets.forEach(el => observer.observe(el));
+
+  // --- Scrollspy: destaca no menu a seção que está sendo vista ---
+  // Considera a seção "ativa" quando ela cruza uma faixa próxima ao topo
+  // (logo abaixo do header sticky), não quando só encosta na borda da tela.
+  const navLinks = Array.from(document.querySelectorAll('.nav__list a[href^="#"]'));
+  const spySections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+  if (navLinks.length && spySections.length) {
+    const setActive = (id) => {
+      navLinks.forEach(link => {
+        link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+      });
+    };
+
+    const spyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    spySections.forEach(section => spyObserver.observe(section));
+  }
 });

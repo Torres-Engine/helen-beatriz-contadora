@@ -92,3 +92,31 @@
 - Monograma de fundo do CTA final (`.hero__monogram--small`): trocado "H B" por `logo-branco.png` em tamanho grande — a versão "quase fantasma" combina bem com o efeito de textura sutil de fundo que esse elemento sempre teve.
 - `logo-azul.png` (navy sobre transparente) guardada como reserva para um futuro contexto de fundo claro (ver `site/assets/LEIA-ME.md`) — não usada em nenhum lugar do site ainda.
 **Motivo:** pedido explícito do usuário, decisão de UX/UI (Juliana) antes da implementação (Felipe). A troca no selo do hero e no monograma do CTA final não foi visualmente conferida em navegador real (sem ferramenta de screenshot disponível nesta sessão) — usuário avisado para conferir e pedir reversão se não ficar bom.
+
+### D-18 — Correções técnicas + elevação de UX/UI (análise crítica pré-lançamento)
+**Contexto:** análise crítica do site (ótica de growth/UX/data) identificou um risco de compliance no texto do card de IR ("sem erros" — afirmação que pode esbarrar nas normas de publicidade do CFC/CRC) e uma lista de melhorias técnicas de baixo esforço e alto impacto. O usuário pediu para aplicar tudo e, adicionalmente, elevar o nível de UX/UI "realmente alto".
+**Decisão:**
+- Texto do card "Especialização em IR" reescrito para não prometer ausência de erro.
+- Fonte "Alex Brush" removida do import do Google Fonts (não usada em nenhum lugar do CSS/HTML).
+- Favicon próprio gerado a partir do caduceu contábil sobre fundo navy, referenciado no `<head>`.
+- Meta tags `og:image`, `og:locale` e Twitter Card adicionadas para preview correto ao compartilhar o link.
+- Dados estruturados (JSON-LD, `AccountingService`) adicionados para SEO.
+- Hero: breakpoint de empilhamento das 3 colunas adiantado de 768px para 1024px, evitando aperto de layout em tablets/notebooks pequenos.
+- `scroll-margin-top` adicionado às seções âncora do menu (o header sticky cobria o topo da seção ao clicar em um link).
+- Acessibilidade: skip link "Pular para o conteúdo" adicionado; conteúdo principal envolvido em `<main id="conteudo">`.
+- UX: scrollspy destaca no menu a seção atualmente visível durante a rolagem.
+- Performance: `rel=preload` na imagem do hero (maior elemento da primeira dobra/LCP) e `loading="lazy"` nas imagens abaixo da dobra.
+- Acabamento visual: header ganha efeito "vidro fosco" (frosted glass) e fica mais compacto ao rolar; botão flutuante de WhatsApp ganha um pulso sutil e lento para chamar atenção ao único CTA fixo da página — ambos respeitam `prefers-reduced-motion` (regra global já existente cobre as novas animações automaticamente).
+**Motivo:** pedido explícito do usuário. Todas as adições seguem a mesma stack vanilla (D-01) — sem novas dependências, sem build step — e todo elemento novo tem função explícita (conversão, acessibilidade, performance ou SEO), não decoração gratuita.
+
+**Adendo — bug de regressão encontrado via print do usuário:** a opacidade do monograma de fundo do CTA final (`.hero__monogram--small`) estava em `0.9` no CSS, embora o CHANGELOG (v0.5.0) já documentasse a recalibração para `0.14` — a correção não tinha sido persistida em algum ponto anterior. Efeito visual: a logo fantasma aparecia quase opaca no mobile, colidindo com o título "Vamos cuidar da sua contabilidade juntos?". Corrigido de volta para `0.14`.
+
+**Adendo 2 — símbolo "Ciências Contábeis" vetorizado:** `caduceu-contabil.png` (148x171px, contorno com transparência de 1 bit, sem antialiasing) ficava serrilhado em telas retina, já que era exibido a 88px em telas com pixel ratio 2x-3x. Traçado como SVG (`caduceu-contabil.svg`, curvas suaves) usando vetorização automática (vtracer) a partir do PNG original — mesmo desenho, agora nítido em qualquer resolução. Substituiu o PNG no medalhão do hero (`index.html`) e na geração do favicon. PNG original mantido em `site/assets/` como referência, sem uso no código.
+
+### D-19 — Migração para Next.js/TypeScript/Tailwind aprovada por exceção (revisa D-01)
+**Contexto:** D-01/ARCHITECTURE.md registrou o gatilho explícito para trocar de stack: "se no futuro entrar blog, área do cliente ou automações, reavaliar para um gerador estático — não antes disso." Nenhum desses três existe hoje: ROADMAP v1 (conteúdo real) não começou, v2 (blog) e v3 (automação) são só planejados. Ao receber a árvore completa (App Router, TypeScript, Tailwind, Shadcn/ui, testes, CI/CD) e o pedido de migração, o veredito técnico foi: **não cabe agora pelo critério que o próprio projeto define** — isso foi apresentado ao usuário antes de qualquer implementação. Usuário confirmou que quer migrar mesmo assim.
+**Decisão:**
+- Migração aprovada por exceção explícita do usuário, com estratégia de **coexistência**: nova base roda em pasta paralela `web/` (Next.js App Router + TypeScript + Tailwind CSS), enquanto `site/` (HTML/CSS/JS puro) continua publicado e no ar até a nova base passar no gate de paridade (ver ROADMAP.md/TASKS.md, plano em ondas). Corte só depois do gate — nunca big-bang.
+- **Cortado do escopo** (gold-plating sem função real neste projeto, que não tem backend/CMS/e-mail/login): grupo de rotas `(auth)`, `services/cms.ts`, `services/mail.ts`, qualquer API route, instalação completa do Shadcn (só os componentes realmente usados: talvez nenhum, é 1 página estática), suíte Playwright/E2E completa (site de 1 página não justifica o peso de manutenção; smoke test simples de build é suficiente por ora).
+- Deploy: workflow `.github/workflows/deploy.yml` atual (aponta para `./site`) precisa de uma segunda versão (ou branch) apontando para o `output: 'export'` do Next.js antes do corte — sem isso o site sai do ar na virada.
+**Motivo:** pedido explícito do usuário, após ser avisado do custo (build step, complexidade, quebra do princípio de "qualquer freelancer edita direto" de D-01). Registrado como exceção pontual, não reversão silenciosa de D-01 — D-01 continua valendo como princípio-padrão do projeto para decisões futuras que não tiverem pedido explícito em contrário.

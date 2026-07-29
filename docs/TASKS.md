@@ -29,16 +29,39 @@
 - [x] Seção Depoimentos removida (com os 3 placeholders fictícios) até haver depoimentos reais — ver DECISIONS.md D-16
 - [x] Travessões ligando frases removidos do texto visível do site (título da página, card "Atendimento direto") — ver DECISIONS.md D-15
 
+## Concluído (v0.8 → v0.9)
+- [x] Texto de risco de compliance corrigido: card "Especialização em IR" prometia "sem erros", troca por texto que não garante ausência de erro — ver DECISIONS.md D-18
+- [x] Fonte "Alex Brush" removida do import do Google Fonts (não era usada em nenhum lugar do CSS/HTML — peso de carregamento morto)
+- [x] Meta tags `og:image`, `og:locale` e Twitter Card adicionadas (preview correto ao compartilhar o link no WhatsApp/redes sociais) — `og:url`/`og:image` ainda com caminho relativo, trocar por URL absoluta quando o domínio for definido
+- [x] Favicon próprio gerado (`assets/favicon.png`, caduceu contábil sobre fundo navy) e referenciado no `<head>`
+- [x] Hero de 3 colunas corrigido na faixa 769-1024px (tablets/notebooks pequenos): breakpoint de empilhamento adiantado de 768px para 1024px só para o hero
+- [x] `scroll-margin-top` adicionado às seções âncora do menu — antes o header sticky cobria o topo da seção ao clicar em um link do menu
+- [x] Link "Pular para o conteúdo" (skip link) adicionado para navegação por teclado/leitor de tela; conteúdo principal envolvido em `<main id="conteudo">`
+- [x] Scrollspy: item do menu correspondente à seção visível fica destacado durante a rolagem
+- [x] Performance: `rel=preload` na imagem do hero (LCP) e `loading="lazy"` nas imagens abaixo da dobra (foto da Helen, monograma do CTA final)
+- [x] Dados estruturados (JSON-LD, `AccountingService`) adicionados para SEO/rich snippets — `url` vazio até o domínio ser definido
+- [x] Header ganhou efeito "vidro fosco" (frosted glass) e fica mais compacto ao rolar; botão flutuante de WhatsApp ganhou pulso sutil de atenção (respeitando `prefers-reduced-motion`) — ver DECISIONS.md D-18
+- [x] Bug de regressão corrigido: opacidade do monograma de fundo do CTA final estava em `0.9` em vez de `0.14` (documentado desde v0.5.0), fazendo a logo fantasma colidir com o título no mobile — encontrado via print do usuário
+- [x] Símbolo "Ciências Contábeis" vetorizado: `caduceu-contabil.png` (148x171px, serrilhado em telas retina) traçado como `caduceu-contabil.svg` (curvas suaves, nítido em qualquer resolução) — substitui o PNG no medalhão do hero e na geração do favicon
+
+## Migração Next.js/TS/Tailwind (aprovada por exceção — ver DECISIONS.md D-19)
+Estratégia de coexistência: `web/` roda em paralelo, `site/` continua publicado até o gate final. Ver `docs/ROADMAP.md` (W-Migração).
+
+- [ ] W0 — Esqueleto vertical: `web/` criado (Next.js App Router + TypeScript + Tailwind), 1 página real com o conteúdo atual portado (não mock), rodando local (`npm run dev`), sem tocar `site/`. **Gate:** builda sem erro de tipo (`tsc --noEmit` limpo) e renderiza as 9 seções da SPEC.
+- [ ] W1 — Componentização: seções viram componentes (`Header`, `Hero`, `Sobre`, `Diferenciais`, `Servicos`, `BannerIR`, `Contato`, `Footer`), design tokens de `site/css/style.css` portados para `tailwind.config` (cores, fontes), microinterações (scrollspy, reveal, WhatsApp flutuante) reimplementadas. **Gate:** paridade visual com `site/` em telas 375/768/1440px, `prefers-reduced-motion` preservado.
+- [ ] W2 — Build de produção: `next build` com `output: 'export'` gera estático compatível com GitHub Pages; novo workflow de deploy (ou variante do `deploy.yml`) apontando para a saída do Next.js. **Gate:** build de produção roda em ambiente limpo, artefato exportado abre localmente sem 404 de asset.
+- [ ] W3 — Corte: `web/` publicado no lugar de `site/`, DNS/Pages settings atualizados, `site/` arquivado (não apagado) por segurança. **Gate humano:** aprovação explícita do usuário após conferir o site novo no ar, antes do corte.
+- [ ] Felipe: atualizar `agents/frontend-engineer.md` para cobrir as duas stacks durante a coexistência (feito nesta rodada — ver arquivo)
+
 ## Pendente — bloqueia publicação
 - [ ] Nº de clientes atendidos → ainda não há placeholder explícito no código para isso; adicionar à seção Sobre/Diferenciais quando o dado for confirmado
 - [ ] Depoimentos reais de clientes → reativar a seção quando houver (ver ROADMAP.md v1)
-- [ ] Fernanda: validar conformidade de todo o conteúdo tributário/contábil com as normas de publicidade do CFC antes do lançamento (incluindo a nova menção à Reforma Tributária)
+- [ ] Fernanda: validar conformidade de todo o conteúdo tributário/contábil com as normas de publicidade do CFC antes do lançamento (incluindo a nova menção à Reforma Tributária e o texto revisado do card de IR)
 
 ## Pendente — não bloqueia, mas recomendado
-- [ ] Favicon próprio → `site/assets/favicon.png`
 - [ ] Comprimir imagens para `.webp` antes de publicar
 - [ ] Escolher e configurar hospedagem (ver ARCHITECTURE.md)
-- [ ] Configurar domínio próprio
+- [ ] Configurar domínio próprio (e então trocar `og:url`/`og:image`/JSON-LD `url` para absolutos)
 - [ ] Diego: configurar Google Analytics/Meta Pixel para medir conversão dos CTAs
 - [ ] Rafael: rodar auditoria de performance/compatibilidade cross-browser antes do lançamento final
 
