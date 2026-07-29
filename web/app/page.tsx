@@ -2,6 +2,7 @@ import Image from "next/image";
 import Header from "./components/Header";
 import WhatsappFloat from "./components/WhatsappFloat";
 import BackToTop from "./components/BackToTop";
+import ScrollProgress from "./components/ScrollProgress";
 
 const WHATSAPP_BASE = "https://wa.me/5541999639108";
 const wa = (text: string) => `${WHATSAPP_BASE}?text=${encodeURIComponent(text)}`;
@@ -88,69 +89,116 @@ const navLinks = [
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <Header />
 
       <main>
         {/* ===================== HERO ===================== */}
         <section
-          className="relative overflow-hidden bg-navy-900 py-16 text-off-white sm:py-24"
+          className="grid min-h-[620px] grid-cols-1 overflow-hidden bg-navy-800 text-off-white lg:grid-cols-[0.9fr_1.25fr_1fr]"
           id="topo"
         >
-          <div className="mx-auto grid max-w-[1160px] gap-12 px-6 lg:grid-cols-[1.4fr_1fr]">
-            <div>
-              <p className="mb-3 text-sm font-bold uppercase tracking-[2px] text-gold">
-                Contabilidade com autoridade
-              </p>
-              <h1 className="mb-6 text-4xl font-extrabold leading-tight sm:text-5xl">
-                Domínio técnico e segurança para a sua vida fiscal e empresarial.
-              </h1>
-              <p className="mb-8 max-w-xl text-lg text-off-white/85">
-                Helen Beatriz é contadora especializada em Imposto de Renda, abertura de
-                empresas e gestão contábil para pessoas físicas e jurídicas. Decisões
-                seguras começam com quem domina o assunto.
-              </p>
+          {/* Coluna 1: foto do leão */}
+          <div
+            className="relative flex min-h-[320px] items-end justify-start bg-navy-900 bg-cover bg-center shadow-[inset_0_0_0_1px_rgba(219,174,114,0.22)]"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(19,39,61,0.04) 0%, rgba(19,39,61,0.12) 45%, rgba(19,39,61,0.55) 100%), url('/assets/leao-hero.jpg')",
+              backgroundPosition: "center, center 38%",
+              backgroundSize: "cover, cover",
+              backgroundRepeat: "no-repeat, no-repeat",
+            }}
+          >
+            <span className="relative z-[1] m-7 inline-flex items-center rounded-full border border-white/35 bg-navy-900/35 px-[18px] py-2.5 backdrop-blur-[2px]">
+              <Image
+                src="/assets/logo-dourado.png"
+                alt=""
+                aria-hidden="true"
+                width={110}
+                height={32}
+                className="h-5 w-auto"
+              />
+            </span>
+          </div>
 
-              <div className="mb-6 flex flex-wrap gap-4">
-                <a
-                  className="flex items-center gap-2 rounded-full bg-gradient-to-br from-gold-light to-gold px-7 py-3.5 font-bold text-navy-900 transition-transform hover:-translate-y-0.5"
-                  target="_blank"
-                  rel="noopener"
-                  href={wa("Olá, Helen! Vi seu site e gostaria de falar sobre contabilidade.")}
-                >
-                  <i className="fa-brands fa-whatsapp" /> Falar com a Helen agora
-                </a>
-                <a
-                  className="flex items-center gap-2 rounded-full border-2 border-white px-7 py-3.5 font-bold text-white transition-colors hover:bg-white hover:text-navy-900"
-                  href="#servicos"
-                >
-                  Ver serviços
-                </a>
-              </div>
+          {/* Coluna 2: texto principal */}
+          <div className="bg-diamond flex flex-col justify-center bg-navy-800 px-6 py-16 sm:px-10">
+            <p className="mb-3 text-sm font-bold uppercase tracking-[2px] text-gold">
+              Contabilidade com autoridade
+            </p>
+            <h1 className="mb-6 max-w-xl text-4xl font-extrabold leading-tight sm:text-5xl">
+              Domínio técnico e segurança para a sua vida fiscal e empresarial.
+            </h1>
+            <p className="mb-8 max-w-xl text-lg text-off-white/85">
+              Helen Beatriz é contadora especializada em Imposto de Renda, abertura de
+              empresas e gestão contábil para pessoas físicas e jurídicas. Decisões
+              seguras começam com quem domina o assunto.
+            </p>
 
-              <p className="text-sm text-off-white/70">
-                Atendimento personalizado &middot; Sigilo total &middot; Atualização
-                constante na legislação
-              </p>
+            <div className="mb-6 flex flex-wrap gap-4">
+              <a
+                className="flex items-center gap-2 rounded-full bg-gradient-to-br from-gold-light to-gold px-7 py-3.5 font-bold text-navy-900 transition-transform hover:-translate-y-0.5"
+                target="_blank"
+                rel="noopener"
+                href={wa("Olá, Helen! Vi seu site e gostaria de falar sobre contabilidade.")}
+              >
+                <i className="fa-brands fa-whatsapp" /> Falar com a Helen agora
+              </a>
+              <a
+                className="flex items-center gap-2 rounded-full border-2 border-white px-7 py-3.5 font-bold text-white transition-colors hover:bg-white hover:text-navy-900"
+                href="#servicos"
+              >
+                Ver serviços
+              </a>
             </div>
 
-            <aside className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
-              <p className="text-sm font-bold uppercase tracking-[2px] text-gold">
-                Ciências Contábeis
-              </p>
-              <div className="flex h-32 w-32 items-center justify-center rounded-full border-2 border-gold/40 bg-navy-800">
+            <p className="text-sm text-off-white/70">
+              Atendimento personalizado &middot; Sigilo total &middot; Atualização
+              constante na legislação
+            </p>
+          </div>
+
+          {/* Coluna 3: medalhão Ciências Contábeis */}
+          <aside className="bg-diamond flex flex-col items-center justify-center gap-5 bg-navy-900 px-6 py-11 text-center lg:border-l lg:border-gold/[0.18]">
+            <p className="text-sm font-bold uppercase tracking-[3px] text-gold">
+              Ciências Contábeis
+            </p>
+
+            <div className="relative flex h-44 w-44 items-center justify-center">
+              {/* Glow */}
+              <span
+                aria-hidden="true"
+                className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgba(219,174,114,0.30),transparent_70%)] blur-[3px]"
+              />
+              {/* Anéis concêntricos */}
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 rounded-full border-[1.5px] border-gold/60"
+              />
+              <span
+                aria-hidden="true"
+                className="absolute inset-[7px] rounded-full border border-gold/30"
+              />
+              {/* Preenchimento dourado */}
+              <div className="relative flex h-[136px] w-[136px] items-center justify-center rounded-full bg-[radial-gradient(circle_at_32%_26%,var(--gold-light)_0%,var(--gold)_55%,#95764e_100%)] shadow-[0_16px_36px_rgba(219,174,114,0.45),inset_0_3px_8px_rgba(255,255,255,0.4)]">
                 <Image
                   src="/assets/caduceu-contabil.svg"
                   alt="Símbolo internacional das Ciências Contábeis"
-                  width={72}
-                  height={72}
+                  width={88}
+                  height={88}
+                  className="drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]"
                 />
               </div>
-              <span className="h-px w-16 bg-white/20" aria-hidden="true" />
-              <p className="italic text-off-white/80">
-                &ldquo;A contabilidade é a linguagem dos negócios.&rdquo;
-              </p>
-            </aside>
-          </div>
+            </div>
+
+            <span
+              className="h-px w-11 bg-gradient-to-r from-transparent via-gold to-transparent"
+              aria-hidden="true"
+            />
+            <p className="max-w-[220px] text-base font-semibold italic leading-relaxed text-off-white/85">
+              &ldquo;A contabilidade é a linguagem dos negócios.&rdquo;
+            </p>
+          </aside>
         </section>
 
         {/* ===================== SOBRE ===================== */}
@@ -235,18 +283,23 @@ export default function Home() {
               {servicos.map((s) => (
                 <article
                   key={s.title}
-                  className="flex flex-col rounded-xl border border-navy-900/10 p-8 transition-shadow hover:shadow-lg"
+                  className="bg-diamond group relative flex flex-col overflow-hidden rounded-[10px] border border-navy-700/40 bg-navy-800 p-8 text-white transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/45 hover:shadow-[0_16px_36px_rgba(0,0,0,0.35)]"
                 >
-                  <i className={`${s.icon} mb-4 text-2xl text-navy-900`} />
-                  <h3 className="mb-2 text-lg font-bold">{s.title}</h3>
-                  <p className="mb-5 flex-1 text-sm text-navy-700">{s.text}</p>
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-gold to-navy-700"
+                  />
+                  <i className={`${s.icon} mb-3 text-2xl text-gold-light transition-transform duration-300 group-hover:scale-110`} />
+                  <h3 className="mb-2 text-lg font-bold text-white">{s.title}</h3>
+                  <p className="mb-5 flex-1 text-sm text-off-white/70">{s.text}</p>
                   <a
                     target="_blank"
                     rel="noopener"
                     href={s.wa}
-                    className="inline-flex items-center gap-2 text-sm font-bold text-gold-dark transition-transform hover:translate-x-1"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-gold-light transition-colors hover:text-gold"
                   >
-                    Saber mais <i className="fa-solid fa-arrow-right" />
+                    Saber mais{" "}
+                    <i className="fa-solid fa-arrow-right transition-transform duration-200" />
                   </a>
                 </article>
               ))}

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.10.3 — 2026-07-28
+- **Paridade visual do `web/` com `site/` completada:** hero volta a ter as 3 colunas originais (foto do leão com selo da logo, texto, medalhão de Ciências Contábeis) em vez da versão simplificada de 2 colunas do primeiro port — `web/app/page.tsx`
+- Cards de "Serviços" recriados com o design real do `site/` (fundo navy com padrão diamantado, borda superior em gradiente dourado→navy, ícone e link em dourado-claro) em vez do cartão claro genérico usado no primeiro port
+- Medalhão "Ciências Contábeis" recriado com o mesmo efeito em camadas do `site/` (glow radial, anéis concêntricos, preenchimento com gradiente dourado e símbolo com drop-shadow)
+- **Barra de progresso de rolagem** adicionada no topo da página (`web/app/components/ScrollProgress.tsx`), paridade com `site/` (D-12)
+- Utilitário `.bg-diamond` (padrão diamantado sutil sobre fundo navy) adicionado em `web/app/globals.css`, reaproveitando o mesmo `--diamond-pattern` do `site/css/style.css`
+
 ## v0.10.2 — 2026-07-28
 - **Responsividade mobile do `web/`:** menu do header vira hamburger abaixo do breakpoint `md`, com dropdown acessível (`aria-expanded`, fecha ao clicar num link) — `web/app/components/Header.tsx`; espaçamento vertical das seções reduzido em telas pequenas (`py-16 sm:py-24`)
 - **Botão flutuante de WhatsApp com pulso** (paridade com `site/` — docs/DECISIONS.md D-18): anel pulsante via `@keyframes whatsapp-ring` em `web/app/globals.css`, respeitando `prefers-reduced-motion`
